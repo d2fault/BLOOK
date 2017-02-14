@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">blookfront</string>
+    <!-- Strings related to login -->
+    <string name="default_url">http://52.78.5.187:5009</string>
 </resources>
