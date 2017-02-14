@@ -2,7 +2,6 @@ package com.cisco.blook;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,21 +16,8 @@ import com.google.zxing.integration.android.IntentResult;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.BaseJsonHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -91,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 getBookInfo();
                 //result.getContents() 이거가 -> isbn 번호입니다!!
                 Log.d("MainActivity", "Scanned");
-                Toast.makeText(this,"Scanned: " + result.getContents(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this,"Scanned: " + result.getContents(), Toast.LENGTH_SHORT).show();
             }
         }else{
             super.onActivityResult(requestCode,resultCode,data);
@@ -105,6 +91,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(int statusCode, Header[] headers, String rawJsonResponse, JSONObject response) {
 
+                Intent intent = new Intent(getApplicationContext(), DetailActivity.class);
+
+                intent.putExtra("cover_s_url", bookData.item.get(0).cover_s_url);
+                intent.putExtra("title", bookData.item.get(0).title);
+                intent.putExtra("author", bookData.item.get(0).author);
+                intent.putExtra("author_t", bookData.item.get(0).author_t);
+                intent.putExtra("list_price", bookData.item.get(0).list_price);
+                intent.putExtra("sale_yn", bookData.item.get(0).sale_yn);
+                intent.putExtra("sale_price", bookData.item.get(0).sale_price);
+                intent.putExtra("description", bookData.item.get(0).description);
+                intent.putExtra("link", bookData.item.get(0).link);
+                //액티비티 시작!
+                startActivity(intent);
             }
 
             @Override
@@ -117,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
                 Gson gson = new Gson();
 
                 try {
-
                     JSONObject json = new JSONObject(rawJsonData);
                     // jsonString을 JSON객체로 만들고
 
@@ -125,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
                     // channel 안에 있는 JSON 객체를 가져옵니다! => 다음 api 예시 참고
 
                     bookData = gson.fromJson(json.toString(), BookData.class);
-                    Log.e("HERE!!!!!", bookData.item.get(0).author_t);
+
+
+                    //Log.e("HERE!!!!!", bookData.item.get(0).cover_s_url);
 
                     // 그 후 json을 문자열 형태로 받아와서 GSON을 이용해 shopResult에 매핑해줍니다.
 

@@ -1,5 +1,8 @@
 package com.cisco.blook;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -26,6 +29,5 @@ public class BookData {
     public String lastBuildDate;
     public String link;
     public String generator;
-
 }
 
