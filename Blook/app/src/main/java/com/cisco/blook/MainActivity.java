@@ -6,10 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.GlideDrawableImageViewTarget;
 import com.google.gson.Gson;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -23,8 +24,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ImageButton imageButton_camera;
-    private Button button_getInfo;
+    private GlideDrawableImageViewTarget imageViewTarget_camera, imageViewTarget_history;
+    private ImageView imageView_camera, imageView_history;
     private AsyncHttpClient asyncHttpClient;
     private BookData bookData;
     private String ibmStr;
@@ -35,19 +36,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initModel();
         initView();
         initListener();
     }
 
-    protected void initView() {
-        button_getInfo = (Button) findViewById(R.id.button_getInfo);
-        imageButton_camera = (ImageButton) findViewById(R.id.imageButton_camera);
+    protected void initModel() {
         asyncHttpClient = new AsyncHttpClient();
     }
 
-    protected void initListener() {
-        imageButton_camera.setOnClickListener(new View.OnClickListener() {
-            @Override
+    protected void initView() {
+        imageView_camera = (ImageView) findViewById(R.id.imageView_camera);
+        imageView_history = (ImageView) findViewById(R.id.imageView_history);
+
+        imageViewTarget_camera = new GlideDrawableImageViewTarget(imageView_camera);
+        Glide.with(this).load(R.raw.buttnum222).into(imageViewTarget_camera);
+
+        imageViewTarget_history = new GlideDrawableImageViewTarget(imageView_history);
+        Glide.with(this).load(R.mipmap.buttnum1).into(imageViewTarget_history);
+
+
+        final Activity activity = this;
+        imageView_camera.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 IntentIntegrator integrator = new IntentIntegrator(activity);
                 integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
@@ -58,10 +68,19 @@ public class MainActivity extends AppCompatActivity {
                 integrator.initiateScan();
             }
         });
-        button_getInfo.setOnClickListener(new View.OnClickListener() {
+    }
+
+    protected void initListener() {
+        imageView_camera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getBookInfo();
+                IntentIntegrator integrator = new IntentIntegrator(activity);
+                integrator.setDesiredBarcodeFormats(IntentIntegrator.ALL_CODE_TYPES);
+                integrator.setPrompt("Scan");
+                integrator.setCameraId(0);
+                integrator.setBeepEnabled(false);
+                integrator.setBarcodeImageEnabled(false);
+                integrator.initiateScan();
             }
         });
     }

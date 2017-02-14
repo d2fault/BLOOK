@@ -11,27 +11,42 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:weightSum="10">
+        android:background="@mipmap/backgrver4"
+        android:weightSum="10"
+        android:paddingTop="10dp"
+        android:padding="20dp">
 
-        <ImageButton
-            android:id="@+id/imageButton_camera"
+        <ImageView
+            android:id="@+id/imageView_history"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4" />
 
-        <ImageButton
-            android:id="@+id/takeP"
+        <ImageView
+            android:id="@+id/imageView_camera"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="4" />
 
-        <Button
-            android:id="@+id/button_getInfo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:weightSum="20"
             android:layout_weight="2"
-            android:text="FIND"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:gravity="bottom">
 
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"/>
+            <ImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@mipmap/admitbutton"
+                android:layout_weight="5"/>
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>
