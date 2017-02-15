@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide;
 
 public class DetailActivity extends AppCompatActivity {
 
-    Button button_link;
+    ImageView imageView_link;
     ImageView imageView_cover;
     TextView textView_title, textView_author, textView_list_price, textView_sale_price, textView_description;
     BookItem bookItem;
@@ -45,7 +45,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initView() {
 
-        button_link = (Button) findViewById(R.id.button_link);
+        imageView_link = (ImageView) findViewById(R.id.button_link);
         imageView_cover = (ImageView) findViewById(R.id.imageView_cover);
         textView_title = (TextView) findViewById(R.id.textView_title);
         textView_author = (TextView) findViewById(R.id.textView_author);
@@ -55,7 +55,7 @@ public class DetailActivity extends AppCompatActivity {
     }
 
     private void initListener() {
-        button_link.setOnClickListener(new View.OnClickListener() {
+        imageView_link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(bookItem.link)));

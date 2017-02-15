@@ -27,7 +27,7 @@
             android:id="@+id/textView_title"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:textSize="17dp"/>
         <TextView
             android:id="@+id/textView_author"
@@ -58,13 +58,13 @@
             android:id="@+id/textView_description"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4"/>
+            android:layout_weight="5"/>
 
-        <Button
+        <ImageView
             android:id="@+id/button_link"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/touchformoreinfo"
             android:text="더보기"/>
     </LinearLayout>
 </LinearLayout>
