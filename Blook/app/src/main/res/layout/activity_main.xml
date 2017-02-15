@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@mipmap/backgrver4"
-        android:weightSum="10"
+        android:weightSum="20"
         android:paddingTop="10dp"
         android:padding="20dp">
 
@@ -20,19 +20,19 @@
             android:id="@+id/imageView_history"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4" />
+            android:layout_weight="8.7" />
 
         <ImageView
             android:id="@+id/imageView_camera"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="4" />
+            android:layout_weight="8.7" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:weightSum="20"
-            android:layout_weight="2"
+            android:layout_weight="3"
             android:orientation="horizontal"
             android:layout_gravity="bottom"
             android:gravity="bottom">
@@ -47,6 +47,12 @@
                 android:background="@mipmap/admitbutton"
                 android:layout_weight="5"/>
         </LinearLayout>
+
+        <Button
+            android:id="@+id/button_userConf"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="내 고유번호 확인하기"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,8 +1,10 @@
 package com.cisco.blook;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -24,6 +26,7 @@ public class DetailActivity extends AppCompatActivity {
         initView();
         initModel();
         setView();
+        initListener();
     }
 
     private void initModel() {
@@ -49,6 +52,15 @@ public class DetailActivity extends AppCompatActivity {
         textView_list_price = (TextView) findViewById(R.id.textView_list_price);
         textView_sale_price = (TextView) findViewById(R.id.textView_sale_price);
         textView_description = (TextView) findViewById(R.id.textView_description);
+    }
+
+    private void initListener() {
+        button_link.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(bookItem.link)));
+            }
+        });
     }
 
     private void setView() {

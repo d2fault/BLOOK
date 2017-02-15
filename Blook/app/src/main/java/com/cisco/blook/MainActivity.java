@@ -1,11 +1,16 @@
 package com.cisco.blook;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.provider.Settings;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telecom.TelecomManager;
+import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -28,17 +33,22 @@ import cz.msebera.android.httpclient.entity.ByteArrayEntity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button button_userConf;
     private GlideDrawableImageViewTarget imageViewTarget_camera, imageViewTarget_history;
     private ImageView imageView_camera, imageView_history;
     private AsyncHttpClient asyncHttpClient;
     private BookData bookData;
     private String ibmStr;
     private final Activity activity = this;
+    private String idByANDROID_ID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        idByANDROID_ID = Settings.Secure.getString(getContentResolver(), Settings.Secure.ANDROID_ID);
+
 
         initModel();
         initView();
@@ -52,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     protected void initView() {
         imageView_camera = (ImageView) findViewById(R.id.imageView_camera);
         imageView_history = (ImageView) findViewById(R.id.imageView_history);
+        button_userConf = (Button) findViewById(R.id.button_userConf);
 
         imageViewTarget_camera = new GlideDrawableImageViewTarget(imageView_camera);
         Glide.with(this).load(R.raw.buttnum222).into(imageViewTarget_camera);
@@ -85,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
                 integrator.setBeepEnabled(false);
                 integrator.setBarcodeImageEnabled(false);
                 integrator.initiateScan();
+            }
+        });
+
+        button_userConf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "고유 번호 : " + idByANDROID_ID, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -133,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
                     json.put("saleprice", bookData.item.get(0).sale_price);
                     json.put("description", bookData.item.get(0).description);
                     json.put("link", bookData.item.get(0).link);
+                    json.put("isbn13", bookData.item.get(0).isbn13);
+                    json.put("userconf", idByANDROID_ID);
 
                 }catch(JSONException e) {
                     e.printStackTrace();
