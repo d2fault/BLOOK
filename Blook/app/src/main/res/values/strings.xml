@@ -2,5 +2,5 @@
     <string name="app_name">Blook</string>
     <string name="daum_book_api_url">https://apis.daum.net/search/book?apikey=</string>
     <string name="daum_book_api_key">74ae6b934423a9fef2fa76b95e6c292e</string>
-    <string name="server_url">52.78.5.187/blook/photos</string>
+    <string name="server_url">http://52.78.5.187:5005/api/books</string>
 </resources>

@@ -57,14 +57,16 @@ public class DetailActivity extends AppCompatActivity {
         textView_title.setText(bookItem.title);
 
         if (!bookItem.author_t.equals(""))
-            textView_author.setText(bookItem.author_t);
+            textView_author.setText("저자 : " + bookItem.author_t);
         else
-            textView_author.setText(bookItem.author);
+            textView_author.setText("저자 : " + bookItem.author);
 
-        textView_list_price.setText(bookItem.list_price);
+        textView_list_price.setText("정가 : " + bookItem.list_price);
 
         if (bookItem.sale_yn.equals("Y"))
-            textView_sale_price.setText(bookItem.sale_price);
+            textView_sale_price.setText("할인가 : " + bookItem.sale_price);
+        else
+            textView_sale_price.setText("정가제 상품입니다.");
 
         textView_description.setText(bookItem.description);
     }
